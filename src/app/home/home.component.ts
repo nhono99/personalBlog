@@ -1,3 +1,4 @@
+import { MyBackendService } from './../core/my-backend.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  posts$ = this.myBackendService.getPosts();
 
-  constructor() { }
+  constructor(private myBackendService: MyBackendService) { }
 
   ngOnInit() {
   }

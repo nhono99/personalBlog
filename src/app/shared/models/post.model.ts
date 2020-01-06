@@ -15,3 +15,4 @@ export interface IPost {
     date: Date;
     slug: string;
 }
+

@@ -3,7 +3,7 @@ import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { of, Subject, Observable } from 'rxjs';
-import { tap } from 'rxjs/oprators';
+import { tap } from 'rxjs/operators';
 
 const API_URL = environment.api_url;
 const POST_URL = '/home/post';
@@ -23,8 +23,8 @@ export class MyBackendService {
       return of(this.posts);
     }
 
-    return this.httpClient.get<IPost>(`${API_URL}${POST_URL}`)
-      .pipe(tap(posts => this.posts = posts));
+    return this.httpClient.get<IPost[]>(`${API_URL}${POST_URL}`)
+      .pipe(tap((posts) => this.posts = posts));
   }
 
   getPost(id: number) {
@@ -34,5 +34,7 @@ export class MyBackendService {
         this.post$.next(post);
       }
     }
+    this.httpClient.get<IPost>(`${API_URL}${POST_URL}/${id}`)
+    .subscribe(post => this.post$.next(post));
   }
 }
